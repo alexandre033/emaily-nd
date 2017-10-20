@@ -1,31 +1,9 @@
 const express = require("express");
-const passport = require("passport");
-const keys = require("./config/keys.js");
+require('./services/passport');
 const app = express();
-const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
 
-
-passport.use(
-	new GoogleStrategy(
-		{
-			clientID: keys.GOOGLE_CLIENT_ID,
-			clientSecret: keys.GOOGLE_CLIENT_SECRET,
-			callbackURL: "/auth/google/callback"
-		},
-    (accessToken) => {
-      console.log(accessToken);
-    }
-	)
-);
-
-app.get(
-	'/auth/google',
-	passport.authenticate('google', {
-		scope: ["profile", "email"]
-	})
-);
-
-
+//Call the arrow function in routes and pass the argument app
+require('./routes/authRoutes')(app);
 
 const PORT = process.env.PORT || 5000;
 
