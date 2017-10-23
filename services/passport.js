@@ -24,7 +24,8 @@ passport.use(
 		{
 			clientID: keys.GOOGLE_CLIENT_ID,
 			clientSecret: keys.GOOGLE_CLIENT_SECRET,
-			callbackURL: "/auth/google/callback"
+			callbackURL: "/auth/google/callback",
+			proxy: true
 		},
 		(accessToken, token, tokenSecret, profile, done) => {
 			//Know if user is already in db
